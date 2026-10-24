@@ -1,231 +1,48 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111111">
-  <meta name="description" content="Shamus Creates — original songs, unexpected genres. From Prompt To Playback.">
-  <title>Shamus Creates | From Prompt To Playback</title>
-  <style>
-    :root {
-      --bg: #101010; --panel: #191919; --text: #f5f1e9; --muted: #aaa59d;
-      --accent: #e64b32; --line: #34312f; --gold: #e5b45d;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
-    }
-    a { color: inherit; }
-    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; }
-    header {
-      display: flex; justify-content: space-between; align-items: center; gap: 24px;
-      padding: 25px 0; border-bottom: 1px solid var(--line);
-    }
-    .brand { font-weight: 900; letter-spacing: .13em; font-size: .95rem; text-transform: uppercase; }
-    .brand span { color: var(--accent); }
-    nav { display: flex; gap: 23px; flex-wrap: wrap; }
-    nav a { color: var(--muted); text-decoration: none; font-size: .85rem; }
-    nav a:hover { color: var(--text); }
-    .hero { padding: 80px 0 70px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center; }
-    .eyebrow { color: var(--gold); font-size: .75rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
-    h1 { margin: 16px 0 18px; font-size: clamp(3rem, 7vw, 6.2rem); line-height: .91; letter-spacing: -.075em; text-transform: uppercase; }
-    h1 .accent { color: var(--accent); }
-    .hero p { max-width: 560px; color: #c3beb6; font-size: 1.08rem; }
-    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 18px; border-radius: 3px; text-decoration: none; font-size: .88rem; font-weight: 800; }
-    .primary { background: var(--accent); color: #fff; }
-    .secondary { border: 1px solid #5a5550; color: var(--text); }
-    .hero-art {
-      min-height: 390px; position: relative; overflow: hidden; border: 1px solid #37312d;
-      background:
-        radial-gradient(ellipse at 72% 26%, rgba(230,75,50,.82), transparent 28%),
-        radial-gradient(ellipse at 23% 80%, rgba(229,180,93,.48), transparent 29%),
-        linear-gradient(135deg, #28221f 0%, #101010 48%, #301713 100%);
-      display: flex; align-items: end; padding: 28px;
-    }
-    .hero-art:before, .hero-art:after { content:""; position:absolute; border:1px solid rgba(255,255,255,.18); border-radius:50%; transform: rotate(-25deg); }
-    .hero-art:before { width: 420px; height: 210px; top: 48px; left: -60px; }
-    .hero-art:after { width: 440px; height: 250px; top: 87px; left: 30px; }
-    .art-copy { position: relative; z-index: 1; }
-    .art-copy strong { display:block; font-size: clamp(1.7rem, 4vw, 3rem); line-height: .95; letter-spacing: -.05em; text-transform: uppercase; }
-    .art-copy small { display:block; margin-top: 13px; color: #ddd0c4; letter-spacing: .18em; font-size: .68rem; }
-    section { padding: 65px 0; border-top: 1px solid var(--line); }
-    .section-head { display:flex; justify-content:space-between; align-items:end; gap: 24px; margin-bottom: 28px; }
-    h2 { margin: 8px 0 0; font-size: clamp(1.9rem, 4vw, 3.3rem); line-height: 1; letter-spacing: -.055em; text-transform: uppercase; }
-    .section-head p { color: var(--muted); max-width: 390px; margin: 0; font-size: .9rem; }
-    .listen-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-    .panel { background: var(--panel); border: 1px solid var(--line); padding: 22px; }
-    .panel h3 { margin: 0 0 6px; font-size: 1.08rem; }
-    .panel p { margin: 0 0 18px; color: var(--muted); font-size: .9rem; }
-    iframe { border: 0; display:block; width:100%; border-radius: 8px; }
-    .spotify-artist { height: 500px; }
-    .spotify-playlist { height: 352px; }
-    .genres { display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .genre { min-height: 130px; padding: 20px; border: 1px solid var(--line); background: linear-gradient(145deg, #1c1a19, #121212); display:flex; flex-direction:column; justify-content:space-between; }
-    .genre b { font-size: 1.1rem; text-transform: uppercase; letter-spacing: -.03em; }
-    .genre span { color: var(--accent); font-size: .7rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
-    .about { display:grid; grid-template-columns: .8fr 1.2fr; gap: 45px; align-items:start; }
-    .about-mark { font-size: clamp(3rem, 7vw, 6rem); line-height: .85; letter-spacing: -.08em; font-weight: 950; color: var(--accent); text-transform: uppercase; }
-    .about-copy p { color: #c4beb6; max-width: 700px; }
-    .links { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .link-card { padding: 22px; border: 1px solid var(--line); background: var(--panel); text-decoration:none; transition: transform .2s, border-color .2s; }
-    .link-card:hover { transform: translateY(-3px); border-color: var(--accent); }
-    .link-card b { display:block; font-size: 1rem; margin-bottom: 5px; }
-    .link-card span { color: var(--muted); font-size: .82rem; }
-    footer { padding: 28px 0 36px; border-top: 1px solid var(--line); display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; color: var(--muted); font-size: .78rem; }
-    footer strong { color: var(--text); letter-spacing: .1em; }
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 28px, 1120px); }
-      header { align-items:flex-start; flex-direction:column; }
-      nav { gap: 14px; }
-      .hero { padding: 55px 0 45px; grid-template-columns: 1fr; gap: 28px; }
-      .hero-art { min-height: 280px; }
-      .section-head, .about { display:block; }
-      .section-head p { margin-top: 15px; }
-      .listen-grid { grid-template-columns: 1fr; }
-      .genres { grid-template-columns: repeat(2, 1fr); }
-      .links { grid-template-columns: 1fr; }
-      .about-mark { margin-bottom: 25px; }
-      section { padding: 48px 0; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<meta name="description" content="Shamus Creates — original songs, unexpected genres. From Prompt To Playback.">
+<title>Shamus Creates | From Prompt To Playback</title>
+<style>
+:root{--bg:#101010;--panel:#191919;--text:#f5f1e9;--muted:#aaa59d;--accent:#e64b32;--line:#34312f;--gold:#e5b45d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}a{color:inherit}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:25px 0;border-bottom:1px solid var(--line)}.brand{font-weight:900;letter-spacing:.13em;font-size:.95rem;text-transform:uppercase;text-decoration:none}.brand span{color:var(--accent)}nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:var(--muted);text-decoration:none;font-size:.85rem}nav a:hover{color:var(--text)}
+.hero{padding:80px 0 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}.eyebrow{color:var(--gold);font-size:.75rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase}h1{margin:16px 0 18px;font-size:clamp(3rem,7vw,6.2rem);line-height:.91;letter-spacing:-.075em;text-transform:uppercase}h1 .accent{color:var(--accent)}.hero p{max-width:560px;color:#c3beb6;font-size:1.08rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 18px;border-radius:3px;text-decoration:none;font-size:.88rem;font-weight:800}.primary{background:var(--accent);color:#fff}.secondary{border:1px solid #5a5550;color:var(--text)}
+.hero-art{min-height:390px;position:relative;overflow:hidden;border:1px solid #37312d;background:radial-gradient(ellipse at 72% 26%,rgba(230,75,50,.82),transparent 28%),radial-gradient(ellipse at 23% 80%,rgba(229,180,93,.48),transparent 29%),linear-gradient(135deg,#28221f 0%,#101010 48%,#301713 100%);display:flex;align-items:end;padding:28px}.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.18);border-radius:50%;transform:rotate(-25deg)}.hero-art:before{width:420px;height:210px;top:48px;left:-60px}.hero-art:after{width:440px;height:250px;top:87px;left:30px}.art-copy{position:relative;z-index:1}.art-copy strong{display:block;font-size:clamp(1.7rem,4vw,3rem);line-height:.95;letter-spacing:-.05em;text-transform:uppercase}.art-copy small{display:block;margin-top:13px;color:#ddd0c4;letter-spacing:.18em;font-size:.68rem}
+section{padding:65px 0;border-top:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}h2{margin:8px 0 0;font-size:clamp(1.9rem,4vw,3.3rem);line-height:1;letter-spacing:-.055em;text-transform:uppercase}.section-head p{color:var(--muted);max-width:390px;margin:0;font-size:.9rem}.listen-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.panel{background:var(--panel);border:1px solid var(--line);padding:22px}.panel h3{margin:0 0 6px;font-size:1.08rem}.panel p{margin:0 0 18px;color:var(--muted);font-size:.9rem}iframe{border:0;display:block;width:100%;border-radius:8px}.spotify-artist{height:500px}.spotify-playlist{height:352px}
+.genres{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.genre{min-height:130px;padding:20px;border:1px solid var(--line);background:linear-gradient(145deg,#1c1a19,#121212);display:flex;flex-direction:column;justify-content:space-between}.genre b{font-size:1.1rem;text-transform:uppercase;letter-spacing:-.03em}.genre span{color:var(--accent);font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:start}.about-mark{font-size:clamp(3rem,7vw,6rem);line-height:.85;letter-spacing:-.08em;font-weight:950;color:var(--accent);text-transform:uppercase}.about-copy p{color:#c4beb6;max-width:700px}.links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.link-card{padding:22px;border:1px solid var(--line);background:var(--panel);text-decoration:none;transition:transform .2s,border-color .2s}.link-card:hover{transform:translateY(-3px);border-color:var(--accent)}.link-card b{display:block;font-size:1rem;margin-bottom:5px}.link-card span{color:var(--muted);font-size:.82rem}footer{padding:28px 0 36px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:.78rem}footer strong{color:var(--text);letter-spacing:.1em}
+@media(max-width:760px){.wrap{width:min(100% - 28px,1120px)}header{align-items:flex-start;flex-direction:column}nav{gap:14px}.hero{padding:55px 0 45px;grid-template-columns:1fr;gap:28px}.hero-art{min-height:280px}.section-head,.about{display:block}.section-head p{margin-top:15px}.listen-grid{grid-template-columns:1fr}.genres{grid-template-columns:repeat(2,1fr)}.links{grid-template-columns:1fr}.about-mark{margin-bottom:25px}section{padding:48px 0}}
+</style>
 </head>
-<body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="#" aria-label="Shamus Creates home" style="text-decoration:none">SHAMUS <span>CREATES</span></a>
-      <nav aria-label="Main navigation">
-        <a href="#listen">Listen</a>
-        <a href="#sounds">The Sound</a>
-        <a href="#about">About</a>
-        <a href="#connect">Connect</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero" style="border-top:0">
-        <div>
-          <div class="eyebrow">Independent artist · Original music</div>
-          <h1>From Prompt<br>To <span class="accent">Playback</span></h1>
-          <p>Original songs. Unexpected genres. One creative vision. Step inside the music of Shamus Creates — a genre-hopping project built around songwriting, experimentation, and the feeling a great track leaves behind.</p>
-          <div class="actions">
-            <a class="button primary" href="https://open.spotify.com/artist/4txVlO03hhRhRbduOa5vEP" target="_blank" rel="noopener">▶ Listen on Spotify</a>
-            <a class="button secondary" href="#listen">Explore the music ↓</a>
-          </div>
-        </div>
-        <div class="hero-art" role="img" aria-label="Abstract dark music artwork in warm red and amber tones">
-          <div class="art-copy">
-            <strong>Sound without<br>one lane.</strong>
-            <small>SONGWRITING · EXPERIMENTATION · FEELING</small>
-          </div>
-        </div>
-      </section>
-
-      <section id="listen">
-        <div class="section-head">
-          <div><div class="eyebrow">Press play</div><h2>Enter the music</h2></div>
-          <p>Listen here, then follow the artist profile to keep up with new releases.</p>
-        </div>
-        <div class="listen-grid">
-          <div class="panel">
-            <h3>Shamus Creates on Spotify</h3>
-            <p>Browse the artist profile and available releases.</p>
-            <iframe class="spotify-artist" src="https://open.spotify.com/embed/artist/4txVlO03hhRhRbduOa5vEP?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Shamus Creates Spotify artist profile"></iframe>
-          </div>
-          <div class="panel">
-            <h3>Find your next favorite track</h3>
-            <p>Explore the catalog on Spotify.</p>
-            <iframe class="spotify-playlist" src="https://open.spotify.com/embed/artist/4txVlO03hhRhRbduOa5vEP?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Shamus Creates music on Spotify"></iframe>
-            <div class="actions">
-              <a class="button secondary" href="https://open.spotify.com/artist/4txVlO03hhRhRbduOa5vEP" target="_blank" rel="noopener">Open full Spotify profile ↗</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      <section id="featured">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Start here</div>
-            <h2>Featured tracks</h2>
-          </div>
-          <p>Two tracks to get you into the Shamus Creates sound.</p>
-        </div>
-
-        <div class="listen-grid">
-          <div class="panel">
-            <h3>Featured Track 01</h3>
-            <iframe
-              src="https://open.spotify.com/embed/track/4FKV8RoYK4u4eN4KABXL3d"
-              height="352"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              title="Featured track one">
-            </iframe>
-          </div>
-
-          <div class="panel">
-            <h3>Featured Track 02</h3>
-            <iframe
-              src="https://open.spotify.com/embed/track/7vRNQ20VF12PVNQfwvoLF3"
-              height="352"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              title="Featured track two">
-            </iframe>
-          </div>
-        </div>
-      </section>
-
-      <section id="sounds">
-        <div class="section-head">
-          <div><div class="eyebrow">No single lane</div><h2>Different sounds<br>Same curiosity</h2></div>
-          <p>A living catalog that moves between styles, moods, and eras. These are signposts for the musical range, not limits.</p>
-        </div>
-        <div class="genres">
-          <div class="genre"><span>01 / Rhythm</span><b>Hip-Hop<br>& R&B</b></div>
-          <div class="genre"><span>02 / Movement</span><b>Electronic<br>& Dance</b></div>
-          <div class="genre"><span>03 / Energy</span><b>House<br>& DnB</b></div>
-          <div class="genre"><span>04 / Feeling</span><b>Stories<br>& Songcraft</b></div>
-        </div>
-      </section>
-
-      <section id="about">
-        <div class="about">
-          <div>
-            <div class="eyebrow">Meet the creator</div>
-            <div class="about-mark">Shamus<br>Creates.</div>
-          </div>
-          <div class="about-copy">
-            <h2>Made to explore</h2>
-            <p>Shamus Creates is an independent music project built on a simple idea: follow the song wherever it wants to go. From lyric-driven stories to electronic experiments and throwback-inspired sounds, each release is an opportunity to explore a new mood or musical direction.</p>
-            <p>Songwriting and AI-assisted music creation come together as part of the process — from the first idea to the final playback. The goal is to make music that connects, surprises, and gives listeners something worth returning to.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="connect">
-        <div class="section-head">
-          <div><div class="eyebrow">Stay in the loop</div><h2>Find Shamus Creates</h2></div>
-          <p>Follow along, discover releases, and share the music with someone who might connect with it.</p>
-        </div>
-        <div class="links">
-          <a class="link-card" href="https://open.spotify.com/artist/4txVlO03hhRhRbduOa5vEP" target="_blank" rel="noopener"><b>Spotify ↗</b><span>Stream the catalog and follow the artist.</span></a>
-          <a class="link-card" href="https://www.youtube.com/@Shamus_Creates" target="_blank" rel="noopener"><b>YouTube ↗</b><span>Visit the channel for music and video content.</span></a>
-          <a class="link-card" href="https://linktr.ee/Shamus_Creates" target="_blank" rel="noopener"><b>All links ↗</b><span>Find more Shamus Creates destinations.</span></a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <strong>SHAMUS CREATES</strong>
-      <span>From Prompt To Playback · © <span id="year">2026</span></span>
-    </footer>
-  </div>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
-</body>
-</html>
+<body><div class="wrap">
+<header>
+<a class="brand" href="#" aria-label="Shamus Creates home">SHAMUS <span>CREATES</span></a>
+<nav aria-label="Main navigation"><a href="#listen">Listen</a><a href="#featured">Featured Tracks</a><a href="#sounds">The Sound</a><a href="#about">About</a><a href="#connect">Connect</a></nav>
+</header>
+<main>
+<section class="hero" style="border-top:0">
+<div><div class="eyebrow">Independent artist · Original music</div><h1>From Prompt<br>To <span class="accent">Playback</span></h1>
+<p>Original songs. Unexpected genres. One creative vision. Step inside the music of Shamus Creates — a genre-hopping project built around songwriting, experimentation, and the feeling a great track leaves behind.</p>
+<div class="actions"><a class="button primary" href="https://open.spotify.com/artist/4txVlO03hhRhRbduOa5vEP" target="_blank" rel="noopener">▶ Listen on Spotify</a><a class="button secondary" href="#listen">Explore the music ↓</a></div></div>
+<div class="hero-art" role="img" aria-label="Abstract dark music artwork in warm red and amber tones"><div class="art-copy"><strong>Sound without<br>one lane.</strong><small>SONGWRITING · EXPERIMENTATION · FEELING</small></div></div>
+</section>
+<section id="listen"><div class="section-head"><div><div class="eyebrow">Press play</div><h2>Enter the music</h2></div><p>Listen here, then follow the artist profile to keep up with new releases.</p></div>
+<div class="listen-grid"><div class="panel"><h3>Shamus Creates on Spotify</h3><p>Browse the artist profile and available releases.</p><iframe class="spotify-artist" src="https://open.spotify.com/embed/artist/4txVlO03hhRhRbduOa5vEP?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Shamus Creates Spotify artist profile"></iframe></div>
+<div class="panel"><h3>Explore the catalog</h3><p>Find your next favorite track on Spotify.</p><iframe class="spotify-playlist" src="https://open.spotify.com/embed/artist/4txVlO03hhRhRbduOa5vEP?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Shamus Creates music on Spotify"></iframe><div class="actions"><a class="button secondary" href="https://open.spotify.com/artist/4txVlO03hhRhRbduOa5vEP" target="_blank" rel="noopener">Open full Spotify profile ↗</a></div></div></div></section>
+<section id="featured"><div class="section-head"><div><div class="eyebrow">Start here</div><h2>Featured tracks</h2></div><p>Two tracks to get you into the Shamus Creates sound. Press play and explore the catalog.</p></div>
+<div class="listen-grid">
+<div class="panel"><h3>Featured Track 01</h3><p>Listen on Spotify</p><iframe src="https://open.spotify.com/embed/track/4FKV8RoYK4u4eN4KABXL3d?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Featured Shamus Creates track one"></iframe><div class="actions"><a class="button secondary" href="https://open.spotify.com/track/4FKV8RoYK4u4eN4KABXL3d" target="_blank" rel="noopener">Open track on Spotify ↗</a></div></div>
+<div class="panel"><h3>Featured Track 02</h3><p>Listen on Spotify</p><iframe src="https://open.spotify.com/embed/track/7vRNQ20VF12PVNQfwvoLF3?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Featured Shamus Creates track two"></iframe><div class="actions"><a class="button secondary" href="https://open.spotify.com/track/7vRNQ20VF12PVNQfwvoLF3" target="_blank" rel="noopener">Open track on Spotify ↗</a></div></div>
+</div></section>
+<section id="sounds"><div class="section-head"><div><div class="eyebrow">No single lane</div><h2>Different sounds<br>Same curiosity</h2></div><p>A living catalog that moves between styles, moods, and eras. These are signposts for the musical range, not limits.</p></div>
+<div class="genres"><div class="genre"><span>01 / Rhythm</span><b>Hip-Hop<br>& R&amp;B</b></div><div class="genre"><span>02 / Movement</span><b>Electronic<br>&amp; Dance</b></div><div class="genre"><span>03 / Energy</span><b>House<br>&amp; DnB</b></div><div class="genre"><span>04 / Feeling</span><b>Stories<br>&amp; Songcraft</b></div></div></section>
+<section id="about"><div class="about"><div><div class="eyebrow">Meet the creator</div><div class="about-mark">Shamus<br>Creates.</div></div><div class="about-copy"><h2>Made to explore</h2><p>Shamus Creates is an independent music project built on a simple idea: follow the song wherever it wants to go. From lyric-driven stories to electronic experiments and throwback-inspired sounds, each release is an opportunity to explore a new mood or musical direction.</p><p>Songwriting and AI-assisted music creation come together as part of the process — from the first idea to the final playback. The goal is to make music that connects, surprises, and gives listeners something worth returning to.</p></div></div></section>
+<section id="connect"><div class="section-head"><div><div class="eyebrow">Stay in the loop</div><h2>Find Shamus Creates</h2></div><p>Follow along, discover releases, and share the music with someone who might connect with it.</p></div>
+<div class="links"><a class="link-card" href="https://open.spotify.com/artist/4txVlO03hhRhRbduOa5vEP" target="_blank" rel="noopener"><b>Spotify ↗</b><span>Stream the catalog and follow the artist.</span></a><a class="link-card" href="https://www.youtube.com/@Shamus_Creates" target="_blank" rel="noopener"><b>YouTube Music ↗</b><span>Visit the Shamus Creates music channel.</span></a><a class="link-card" href="https://linktr.ee/Shamus_Creates" target="_blank" rel="noopener"><b>All links ↗</b><span>Find more Shamus Creates destinations.</span></a></div></section>
+</main>
+<footer><strong>SHAMUS CREATES</strong><span>From Prompt To Playback · © <span id="year">2026</span></span></footer>
+</div><script>document.getElementById("year").textContent = new Date().getFullYear();</script></body></html>
