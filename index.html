@@ -173,6 +173,12 @@ footer strong{color:var(--text)}
  .link-card:last-child{border-bottom:0}
 }
 
+
+/* Hero artwork: show more of the original image in a less panoramic frame */
+.hero-art{width:min(100%,900px);min-height:560px;margin:0 auto;background-size:contain;background-position:center;background-color:#171615;box-shadow:12px 12px 0 var(--accent)}
+.hero-art:after{padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.86))}
+@media(max-width:760px){.hero-art{width:100%;min-height:420px;background-size:contain;box-shadow:7px 7px 0 var(--accent)}}
+
 </style>
 </head>
 <body><div class="wrap">
