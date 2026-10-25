@@ -172,17 +172,18 @@ footer strong{color:var(--text)}
 }
 
 
-/* Compact From Prompt To Playback feature */
+/* Compact From Prompt To Playback feature — scoped to this section only */
 #featured{padding:48px 0}
 #featured .section-head{margin-bottom:22px}
 #featured .section-head p{max-width:320px;font-size:.88rem}
-#featured .featured-grid{grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
-#featured .featured-grid .panel{padding:0 0 14px;border-top:2px solid var(--text);min-width:0}
-#featured .featured-grid .panel h3{font-size:1.25rem;margin:12px 0 4px}
-#featured .featured-grid .panel p{font-size:.86rem;margin:0 0 8px}
-#featured .featured-grid .panel .eyebrow{margin:16px 0 0 0;font-size:.65rem}
-#featured .featured-grid .panel audio{margin-top:12px}
-@media(max-width:760px){#featured{padding:42px 0}#featured .featured-grid{grid-template-columns:1fr;gap:22px}#featured .featured-grid .panel h3{font-size:1.35rem}}
+#featured .featured-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
+#featured .featured-grid>.panel{padding:0 0 14px;border:0;border-top:2px solid var(--text);border-radius:0;background:transparent;min-width:0;overflow:hidden}
+#featured .featured-grid>.panel h3{font-size:1.25rem;line-height:1.1;margin:12px 18px 4px}
+#featured .featured-grid>.panel p{font-size:.86rem;line-height:1.5;margin:0 18px 8px;color:var(--muted)}
+#featured .featured-grid>.panel .eyebrow{margin:16px 18px 0;font-size:.65rem}
+#featured .featured-grid>.panel iframe{width:100%;aspect-ratio:16/9;height:auto;border-radius:0}
+#featured .featured-grid>.panel audio{display:block;width:calc(100% - 36px);margin:12px 18px 0}
+@media(max-width:760px){#featured{padding:42px 0}#featured .featured-grid{grid-template-columns:1fr;gap:22px}#featured .featured-grid>.panel h3{font-size:1.3rem}}
 /* Keep the hero image aligned beside the intro, at a smaller framed size */
 .hero-art{width:100%;height:500px;min-height:0;margin:0;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#171615}
 @media(max-width:760px){.hero-art{height:390px;width:100%;min-height:0;margin:0;background-size:contain}}
