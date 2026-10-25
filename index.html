@@ -91,13 +91,11 @@ header{padding:18px 0 16px;border-bottom:3px solid var(--text);align-items:cente
 .brand{font-size:1rem;letter-spacing:.16em}
 nav a{color:var(--text);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
 nav a:hover{color:var(--accent)}
-.hero{display:grid;grid-template-columns:1fr;gap:0;padding:38px 0 52px}
-.hero>div:first-child{display:grid;grid-template-columns:1.15fr .85fr;column-gap:36px;align-items:end;padding:0 0 24px}
-.hero>div:first-child .eyebrow{grid-column:1/-1}
-.hero h1{grid-column:1;grid-row:2/4;font-size:clamp(4rem,9vw,9rem);line-height:.76;margin:18px 0 0;max-width:800px}
-.hero p{grid-column:2;grid-row:2;align-self:end;font-size:1rem;max-width:450px;margin:0 0 12px;color:#45403a}
-.hero .actions{grid-column:2;grid-row:3;margin:10px 0 0}
-.hero-art{min-height:440px;box-shadow:12px 12px 0 var(--accent);border:2px solid var(--text);background-position:center 15%}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:38px 0 52px;align-items:center}
+.hero>div:first-child{display:block;padding:0}
+.hero h1{font-size:clamp(3.5rem,6.5vw,7rem);line-height:.8;margin:18px 0}
+.hero p{font-size:1rem;max-width:450px;color:#45403a}
+.hero-art{min-height:0;height:500px;width:100%;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#171615;box-shadow:12px 12px 0 var(--accent);border:2px solid var(--text);}
 .hero-art:after{background:linear-gradient(transparent,rgba(0,0,0,.92));font-size:.76rem;letter-spacing:.2em;padding:22px}
 .button{border-radius:0;text-transform:uppercase;letter-spacing:.07em;font-size:.76rem}
 .primary{background:var(--accent);color:#fff}
@@ -150,12 +148,12 @@ footer strong{color:var(--text)}
 @media(max-width:760px){
  .wrap{width:min(100% - 28px,1280px)}
  header{gap:16px}
- .hero{padding:30px 0 40px}
- .hero>div:first-child{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding-bottom:22px}
+ .hero{padding:30px 0 40px;grid-template-columns:1fr;gap:22px}
+ .hero>div:first-child{display:block;padding:0}
  .hero h1{font-size:clamp(3.5rem,15vw,6.2rem);margin:18px 0}
  .hero p{margin:0;color:#45403a}
  .hero .actions{margin-top:18px}
- .hero-art{min-height:320px;box-shadow:7px 7px 0 var(--accent)}
+ .hero-art{height:390px;min-height:0;width:100%;background-size:contain;box-shadow:7px 7px 0 var(--accent)}
  section{padding:48px 0}
  .section-head{display:block}
  .section-head p{margin-top:16px}
@@ -174,10 +172,9 @@ footer strong{color:var(--text)}
 }
 
 
-/* Hero artwork: show more of the original image in a less panoramic frame */
-.hero-art{width:min(100%,900px);min-height:560px;margin:0 auto;background-size:contain;background-position:center;background-color:#171615;box-shadow:12px 12px 0 var(--accent)}
-.hero-art:after{padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.86))}
-@media(max-width:760px){.hero-art{width:100%;min-height:420px;background-size:contain;box-shadow:7px 7px 0 var(--accent)}}
+/* Keep the hero image aligned beside the intro, at a smaller framed size */
+.hero-art{width:100%;height:500px;min-height:0;margin:0;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#171615}
+@media(max-width:760px){.hero-art{height:390px;width:100%;min-height:0;margin:0;background-size:contain}}
 
 </style>
 </head>
